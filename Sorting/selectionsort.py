@@ -23,23 +23,23 @@ import config as cf
 from ADT import list as lt
 from DataStructures import listnode as node
 
-def selectionSort (lst, compFunction): 
+def selectionSort (lst, lessfunction): 
     """
     Selection sort para una lista generica con un comparador establecido
     Args:
         lst:: List
             Lista sobre la cual se realizará el ordenamiento
-        compFunction:
+        lessfunction:
             Funcion de comparación con la cual se organizaran los datos
     Return :: None
     """
-    size = lst['size']
+    size = lt.size(lst)
     pos1 = 1
     while pos1 < size:
         minimum = pos1              # minimun tiene el menor elemento conocido hasta ese momento
         pos2 = pos1 + 1
-        while (pos2 <= size):
-            if (compFunction (lt.getElement(lst, pos2),lt.getElement(lst, minimum))): 
+        while pos2 <= size:
+            if lessfunction (lt.getElement(lst, pos2),lt.getElement(lst, minimum)): 
                 minimum = pos2      # minimum se actualiza con la posición del nuevo elemento más pequeño
             pos2 += 1
         lt.exchange (lst, pos1, minimum)  # se intercambia el elemento más pequeño hasta ese punto con el elemento en pos1

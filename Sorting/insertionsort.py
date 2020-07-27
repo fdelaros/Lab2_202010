@@ -24,22 +24,22 @@ import config as cf
 from ADT import list as lt
 from DataStructures import listnode as node
 
-def insertionSort (lst, compFunction): 
+def insertionSort (lst, lessfunction):
     """
     Insertion sort para una lista genérica con un comparador establecido
     Args:
         lst:: Lista
             Lista sobre la cual se realizara el ordenamiento
-        compFunction
+        lessfunction
             Funcion de comparación con la cual se organizaran los datos
     Return:: None
     """
-    size = lst['size']
+    size = lt.size(lst)
     pos1 = 1
     while pos1 <= size:
         pos2 = pos1
-        while (pos2 >1):
-            if (compFunction (lt.getElement(lst, pos2),lt.getElement(lst, pos2-1))):
+        while pos2 >1:
+            if lessfunction (lt.getElement(lst, pos2),lt.getElement(lst, pos2-1)):
                 lt.exchange (lst, pos2, pos2-1)
             pos2 -= 1
         pos1 += 1

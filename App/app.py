@@ -29,9 +29,10 @@
 import config as cf
 import sys
 import csv
+
 from ADT import list as lt
 from DataStructures import listiterator as it
-from DataStructures import liststructure as lt
+# from DataStructures import liststructure as lt (Error: colocar en comentario)
 
 from time import process_time 
 
@@ -49,8 +50,8 @@ def loadCSVFile (file, sep=";"):
         Borra la lista e informa al usuario
     Returns: None  
     """
-    #lst = lt.newList("ARRAY_LIST") #Usando implementacion arraylist
-    lst = lt.newList() #Usando implementacion linkedlist
+    lst = lt.newList("ARRAY_LIST") #Usando implementacion arraylist
+    #lst = lt.newList() #Usando implementacion linkedlist LINKED_LIST
     print("Cargando archivo ....")
     t1_start = process_time() #tiempo inicial
     dialect = csv.excel()
@@ -58,7 +59,8 @@ def loadCSVFile (file, sep=";"):
     try:
         with open(file, encoding="utf-8") as csvfile:
             spamreader = csv.DictReader(csvfile, dialect=dialect)
-            for row in spamreader: 
+            for row in spamreader:
+                print( row )
                 lt.addLast(lst,row)
     except:
         print("Hubo un error con la carga del archivo")
@@ -76,6 +78,9 @@ def printMenu():
     print("2- Contar los elementos de la Lista")
     print("3- Contar elementos filtrados por palabra clave")
     print("4- Consultar elementos a partir de dos listas")
+    print("5- Ultimo elemento (acceso directo)")
+    print("6- Ultimo elemento (iterativo)")
+    print("7- Ordenamiento")
     print("0- Salir")
 
 def countElementsFilteredByColumn(criteria, column, lst):
@@ -121,7 +126,9 @@ def main():
     Args: None
     Return: None 
     """
-    lista = None 
+    # lista = None 
+    # lista = lt.newList() #Usando implementacion linkedlist 'SINGLE_LINKED'
+    lista = lt.newList('ARRAY_LIST') #Usando implementacion linkedlist 'ARRAY_LIST'
     while True:
         printMenu() #imprimir el menu de opciones en consola
         inputs =input('Seleccione una opción para continuar\n') #leer opción ingresada
@@ -129,6 +136,10 @@ def main():
             if int(inputs[0])==1: #opcion 1
                 lista = loadCSVFile("Data/test.csv") #llamar funcion cargar datos
                 print("Datos cargados, ",lista['size']," elementos cargados")
+                print("Lista:", lista)
+                if lista==None or lista['size']==0: #obtener la longitud de la lista
+                    print("La lista esta vacía")    
+                else: print("La lista tiene ",lista['size']," elementos")
             elif int(inputs[0])==2: #opcion 2
                 if lista==None or lista['size']==0: #obtener la longitud de la lista
                     print("La lista esta vacía")    
@@ -147,8 +158,30 @@ def main():
                     criteria =input('Ingrese el criterio de búsqueda\n')
                     counter=countElementsByCriteria(criteria,0,lista)
                     print("Coinciden ",counter," elementos con el crtierio: '", criteria ,"' (en construcción ...)")
+            elif int(inputs[0])==5: #opcion 5
+                if lista==None or lista['size']==0: #obtener el ultimo nodo de la lista
+                    print("La lista esta vacía")
+                else:
+                    print(lt.lastElement(lista))
+            elif int(inputs[0])==6: #opcion 6
+                if lista==None or lista['size']==0: #obtener el ultimo nodo de la lista
+                    print("La lista esta vacía")
+                else:
+                    print(lt.lastElementIterative(lista))
+            elif int(inputs[0])==7: #opcion 7
+                if lista==None or lista['size']==0: # sort
+                    print("La lista esta vacía")
+                else:
+                    lt.mergeSort(lista, lessFunction)
+                    print(lista)
             elif int(inputs[0])==0: #opcion 0, salir
                 sys.exit(0)
-                
+
+def lessFunction(elem1, elem2):
+    """
+    Compara 2 elementos del conjunto de datos por el criterio 'nombre' 
+    """
+    return elem1['nombre'] < elem2['nombre']
+
 if __name__ == "__main__":
     main()

@@ -30,7 +30,8 @@ def newIterator(lst):
     """
     Inicializa un iterador para la lista lst
     """
-    iterator = {'iterable_lst':lst,'current_node':-1, 'type':'ARRAY_ITERATOR'}
+    # iterator = {'iterable_lst':lst,'current_node':-1, 'type':'ARRAY_ITERATOR'}
+    iterator = {'iterable_lst':lst,'current_node':0, 'type':'ARRAY_ITERATOR'}
     return iterator
 
 
@@ -39,18 +40,26 @@ def hasNext(iterator):
     """
     Informa si existe un nodo en la siguiente posicion de la lista, a partir de la posicion actual del iterador
     """
+    """
     if iterator['iterable_lst'] == []:
         return False
     elif iterator['current_node'] < (iterator['iterable_lst']['size'] - 1):
         return True
     else:
         return False
-
+    """
+    return iterator['current_node'] < iterator['iterable_lst']['size']
 
 def next(iterator):
     """
     Retorna el elemento en la posición siguiente a la indicada por el iterador
     """
+    """
     iterator['current_node'] += 1
     lst = iterator['iterable_lst']
     return lst['elements'][iterator['current_node']]
+    """
+    lst = iterator['iterable_lst']
+    element = lst['elements'][iterator['current_node']]
+    iterator['current_node'] += 1
+    return element

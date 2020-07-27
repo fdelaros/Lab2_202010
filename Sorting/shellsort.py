@@ -26,24 +26,29 @@ from ADT import list as lt
 from DataStructures import listnode as node
 
 
-def shellSort(lst, compFunction):
+def shellSort(lst, lessfunction):
     """
     shellSort sort para una lista generica con un comparador establecido
     Args:
         lst:: List
             Lista sobre la cual se realizará el ordenamiento
-        compFunction:
+        lessfunction:
             Funcion de comparación con la cual se organizaran los datos
     Return :: None
     """
     n = lt.size(lst)
     h = 1
-    while h < n/3:          # Se calcula el tamaño del primer gap. La lista se h-ordena con este tamaño
-        h = 3*h + 1         # por ejemplo para n = 100, h toma un valor inical de 13 , 4, 1
+    print("h=", h)
+    while h < n//3:          # Se calcula el tamaño del primer gap. La lista se h-ordena con este tamaño
+        h = 3*h + 1         # por ejemplo para n = 100, h toma un valor inicial de 40, 13 , 4, 1
+        print("h=", h)
     while (h >= 1):
-        for i in range (h,n):
+        print("Shell h: ", h)
+        for i in range (h+1,n+1):  # posiciones validas para comparar con elementos a h-distancia a la izquierda
             j = i
-            while (j>=h) and compFunction (lt.getElement(lst,j+1),lt.getElement(lst,j-h+1)):
-                lt.exchange (lst, j+1, j-h+1)
-                j -=h
-        h //=3              # h se decrementa en un tercio. cuando h es igual a 1, se comporta como insertionsort
+            print("Shell i: ", i)
+            while (j>=(h+1)) and lessfunction (lt.getElement(lst,j),lt.getElement(lst,j-h)):
+                lt.exchange (lst, j, j-h)
+                print("Shell Exchange: ", j, j-h)
+                j -= h
+        h //= 3              # h se decrementa en un tercio. cuando h es 1, se comporta como insertionsort

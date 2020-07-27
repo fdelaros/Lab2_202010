@@ -126,6 +126,8 @@ class insertionSortTest (unittest.TestCase):
             print (result)
         print ("sorting ....")
         sort.insertionSort (self.lst, self.less)
+        print( "result insertion sort: ")
+        print (self.lst )
         self.assertTrue(self.verifySorting(self.lst, self.less))
 
     def test_orderedElements (self):

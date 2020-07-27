@@ -121,6 +121,24 @@ def lastElement (lst):
 
 
 
+def lastElementIterative (lst):
+    """
+    Retorna el último elemento de la lista, sin eliminarlo. La lista no puede ser vacía
+    Args:
+        lst
+            Lista a evaluar
+    Return::int
+        El último elemento dentro de la lista
+    """
+    ultimo = None
+    i = 0
+    while i < lst['size']:
+        ultimo = lst['elements'][i]
+        i += 1
+    return ultimo
+
+
+
 def getElement (lst, pos):
     """
     Retorna el elemento en la posición pos de la lista sin eliminarlo
@@ -244,4 +262,23 @@ def exchange (lst, pos1, pos2):
     changeInfo (lst, pos1, infopos2)
     changeInfo (lst, pos2, infopos1)
 
+def subList (lst, pos, numelem):
+    """
+    Retorna una sublista de la lista lst, partiendo de la posicion pos, con una longitud de numelem elementos
+    """
+    sublst = {'elements':[], 'size':0, 'type':'ARRAY_LIST' }
+    elem = pos-1
+    cont = 1
+    while  cont <= numelem:
+        sublst['elements'].append (lst['elements'][elem])
+        sublst['size'] += 1
+        elem += 1
+        cont += 1
+    return sublst
 
+def copy (lstSource, lstDest, lo, hi):
+    """
+    copiar la sublista de lstSource en el rango [lo, hi] a la lista lstDest en el mismo rango
+    """
+    for pos in range(lo, hi+1):
+        lstDest['elements'][pos-1] = lstSource['elements'][pos-1]

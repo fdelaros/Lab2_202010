@@ -79,6 +79,16 @@ def size(lst):
     """
     return lst['size'] 
 
+def sizeIterative(lst):
+    """
+    Informa el número de elementos de la lista (recorrido iterativo)
+    """
+    contador = 0
+    node = lst['first']
+    while node != None:
+        contador += 1
+        node = node['next']
+    return contador
 
 def firstElement (lst):
     """
@@ -86,15 +96,20 @@ def firstElement (lst):
     """
     return lst['first']['info']
 
-
-
 def lastElement (lst):
     """
     Retorna el último elemento de la lista, sin eliminarlo.
     """
     return lst['last']['info']
 
-
+def lastElementIterative (lst):
+    """
+    Retorna el último elemento de la lista, sin eliminarlo. (forma iterativa)
+    """
+    node = lst['first']
+    while node['next'] != None:
+        node = node['next']
+    return node['info']
 
 def getElement (lst, pos):
     """
@@ -231,3 +246,37 @@ def exchange (lst, pos1, pos2):
     infopos2 = getElement (lst, pos2)
     changeInfo (lst, pos1, infopos2)
     changeInfo (lst, pos2, infopos1)
+
+def subList (lst, pos, numelem):
+    """
+    Retorna una sublista de la lista lst, partiendo de la posicion pos, con una longitud de numelem elementos
+    """
+    sublst = {'first':None, 'last':None, 'size':0, 'type':'SINGLE_LINKED_LIST' }
+    cont = 1
+    loc = pos
+    while  cont <= numelem:
+        elem = getElement (lst, loc)
+        addLast (sublst, elem)
+        loc += 1
+        cont += 1
+    return sublst
+
+def copy (lstSrc, lstDest, lo, hi):
+    """
+    copiar la sublista de lstSrc en el rango [lo, hi] a la lista lstDest en el mismo rango
+    """
+    currentSrc  = lstSrc['first']
+    currentDest  = lstDest['first']
+    cont = 1
+    while cont < lo:
+        currentSrc = currentSrc['next']
+        currentDest = currentDest['next']
+        cont += 1
+    
+    while cont <= hi:
+        currentDest['info'] = currentSrc['info']
+        currentSrc = currentSrc['next']
+        currentDest = currentDest['next']
+        cont += 1
+        
+        

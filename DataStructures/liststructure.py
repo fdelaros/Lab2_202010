@@ -20,7 +20,11 @@
 
 import config
 from DataStructures import arraylist as alt
-from DataStructures import singlelinkedlist as slt 
+from DataStructures import singlelinkedlist as slt
+from Sorting import selectionsort as sels
+from Sorting import insertionsort as inss
+from Sorting import shellsort as shes
+from Sorting import mergesort as mers
 
 """
   Este módulo implementa el tipo abstracto de datos (TAD) lista. 
@@ -129,7 +133,19 @@ def lastElement (lst):
     else:
         return slt.lastElement(lst)
 
-
+def lastElementIterative (lst):
+    """
+    Retorna el último elemento de la lista, sin eliminarlo.
+    Args:
+        lst
+            Lista a evaluar
+    Return::int
+        El último elemento dentro de la lista
+    """
+    if (lst['type']=='ARRAY_LIST'):
+        return alt.lastElementIterative(lst)
+    else:
+        return slt.lastElementIterative(lst)
 
 def getElement (lst, pos):
     """
@@ -277,4 +293,47 @@ def changeInfo (lst, pos, element):
     else:
         slt.changeInfo (lst, pos, element)
 
+def subList (lst, pos, numelem):
+    """
+    Retorna una sublista de la lista lst, partiendo de la posicion pos, con una longitud de numelem elementos
+    """
+    if (lst['type']=='ARRAY_LIST'):
+        return alt.subList (lst, pos, numelem)
+    else:
+        return slt.subList (lst, pos, numelem)
 
+def copy (lstSrc, lstDest, lo, hi):
+    """
+    copiar la sublista de lstSrc en el rango [lo, hi] a la lista lstDest en el mismo rango
+    """
+    if (lstSrc['type']=='ARRAY_LIST'):
+        return alt.copy (lstSrc, lstDest, lo, hi)
+    else:
+        return slt.copy (lstSrc, lstDest, lo, hi)
+
+        
+def selectionSort(lst, compFunction):
+    """
+    Aplicar selection sort a la lista
+    """
+    sels.selectionSort (lst, compFunction)
+    
+
+def insertionSort(lst, lessfunction):
+    """
+    Aplicar insertion sort a la lista
+    """
+    inss.insertionSort (lst, lessfunction)
+
+
+def shellSort(lst, lessfunction):
+    """
+    Aplicar shell sort a la lista
+    """
+    shes.shellSort (lst, lessfunction)
+
+def mergeSort(lst, lessfunction):
+    """
+    Aplicar merge sort a la lista
+    """
+    mers.mergeSort (lst, lessfunction)

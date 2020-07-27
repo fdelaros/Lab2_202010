@@ -28,13 +28,12 @@ from DataStructures import liststructure as lt
   como un arreglo
 """
 
-def newList (datastructure):
+def newList (datastructure='SINGLE_LINKED'):
     """
-    Crea una lista vacia. datastructure puede ser igual a: 'ARRAY_LIST' o 'SINGLE_LINKED'
+    Crea una lista vacia. datastructure puede ser igual a: 'AYARR_LIST' o 'SINGLE_LINKED'
     """
     lst = lt.newList(datastructure)
     return lst
-
 
 def addFirst(lst, element):
     """
@@ -77,6 +76,12 @@ def lastElement (lst):
     Retorna el último elemento de la lista, sin eliminarlo.
     """
     return lt.lastElement(lst)
+
+def lastElementIterative (lst):
+    """
+    Retorna el último elemento de la lista, sin eliminarlo. Recorrido Iterativo
+    """
+    return lt.lastElementIterative(lst)
 
 
 
@@ -140,4 +145,38 @@ def changeInfo (lst, pos, element):
     """
     lt.changeInfo (lst, pos, element)
 
+def subList (lst, pos, numelem):
+    """
+    Retorna una sublista de la lista lst, partiendo de la posicion pos, con una longitud de numelem elementos
+    """
+    return lt.subList (lst, pos, numelem)
 
+def copy (lstSrc, lstDest, lo, hi):
+    """
+    copiar la sublista de lstSrc en el rango [lo, hi] a la lista lstDest en el mismo rango
+    """
+    lt.copy(lstSrc, lstDest, lo, hi)
+    
+def selectionSort(lst, lessfunction):
+    """
+    Aplicar algoritmo de ordenamiento por seleccion
+    """
+    lt.selectionSort(lst, lessfunction)
+
+def insertionSort(lst, lessfunction):
+    """
+    Aplicar algoritmo de ordenamiento por insercion
+    """
+    lt.insertionSort(lst, lessfunction)
+
+def shellSort(lst, lessfunction):
+    """
+    Aplicar algoritmo de ordenamiento por shell
+    """
+    lt.shellSort(lst, lessfunction)
+
+def mergeSort(lst, lessfunction):
+    """
+    Aplicar algoritmo de ordenamiento por merge
+    """
+    lt.mergeSort(lst, lessfunction)
