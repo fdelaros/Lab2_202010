@@ -78,8 +78,8 @@ def printMenu():
     print("2- Contar los elementos de la Lista")
     print("3- Contar elementos filtrados por palabra clave")
     print("4- Consultar elementos a partir de dos listas")
-    print("5- Ultimo elemento (acceso directo)")
-    print("6- Ultimo elemento (iterativo)")
+    print("5- Ultimo elemento (acceso directo) -nuevo")
+    print("6- Ultimo elemento (iterativo) -nuevo")
     print("7- Ordenamiento")
     print("0- Salir")
 
